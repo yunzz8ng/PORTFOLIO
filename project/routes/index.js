@@ -4,6 +4,7 @@ const user = require("../controller/UserController");
 const router = express.Router();
 
 router.get("/", user.index);
+router.get("/join", user.get_join);
 router.post("/join", user.post_user);
 
 router.get("/login", user.login);

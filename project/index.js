@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 
 app.set("view engine", "ejs");
-app.use( express.static( "uploads" ));
+app.use( express.static( "public" ));
 app.use(express.urlencoded({extended: true}));
 app.use( bodyParser.json() );
 

@@ -2,6 +2,9 @@ const User = require("../model/User");
 
 //메인화면=회원가입화면
 exports.index = (req, res) => {
+    res.render("index");
+}
+exports.get_join = (req, res) => {
     res.render("join");
 }
 
