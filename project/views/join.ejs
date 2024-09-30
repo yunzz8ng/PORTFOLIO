@@ -22,50 +22,75 @@
             document.getElementById("contents").innerHTML = html;
         })
     }
+    
 </script>
 <head>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
 </head>
+<style>
+    .window{
+        position: fixed;
+        position: relative;
+        width: 20%;
+        height: 37%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .window-body{
+        margin-top: 1px;
+        display: flex;
+  justify-content: center;
+  align-items: center; 
+    }
+    .input-box {
+        width: 100%;
+    }
+    #button-group{
+        padding-top: 10px;
+    }
+</style>
 <!-- body -->
 <body>
-<form id="join">
-    <div class="row justify-content-center mt-5">
-        <div class="col-4"></div>
-        <div class="col-4 justify-content-center" id="title">
-            <h6 class="fw-bold fs-2 mb-5 text-center">회원가입</h6> 
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">회원가입</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
         </div>
+        <div class="window-body">
         <div class="col-4"></div>
+        <form id="join">
+            <div class="row justify-content-center">
+                <div class="col-4"></div>
+                <div class="col-4 justify-content-center" id="contents">
+                    <h5 class="fw-bold">ID</h5>
+                    <input class="input-box mb-2" type="text" name="id" placeholder="아이디를 입력하세요" required><br>
+                    <h5 class="fw-bold">Name</h5>
+                    <input class="input-box mb-2" type="text" name="name" placeholder="이름을 입력하세요" required><br>
+                    <h5 class="fw-bold">Email</h5>
+                    <input class="input-box mb-2" type="text" name="email" placeholder="이메일 주소를 입력하세요"><br>
+                    <h5 class="fw-bold">Phone Number</h5>
+                    <input class="input-box mb-2" type="text" name="phoneNumber" placeholder="010 - XXXX - XXXX 형태로 입력하세요"><br>
+                    <h5 class="fw-bold">Password</h5>
+                    <input class="input-box mb-2" type="password" name="password" placeholder="비밀번호를 입력하세요" required><br>
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-4"></div>
+                <div class="col-4" id="button-group">
+                    <button class="join-button" type="button" onclick="joinUser();">회원가입</button>        
+                    <button class="join-button" type="button" onclick="location.href='login';">로그인 하러가기</button>   
+                </div>
+                <div class="col-4"></div>
+            </div>
+            
+        </form>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-4"></div>
-        <div class="col-4 justify-content-center" id="contents">
-            <h6 class="fw-bold">ID</h6>
-            <input class="input-box mb-2" type="text" name="id" placeholder="아이디를 입력하세요" required><br>
-            <h6 class="fw-bold">Name</h6>
-            <input class="input-box mb-2" type="text" name="name" placeholder="이름을 입력하세요" required><br>
-            <h6 class="fw-bold">Email</h6>
-            <input class="input-box mb-2" type="text" name="email" placeholder="이메일 주소를 입력하세요"><br>
-            <h6 class="fw-bold">Phone Number</h6>
-            <input class="input-box mb-2" type="text" name="phoneNumber" placeholder="010 - XXXX - XXXX 형태로 입력하세요"><br>
-            <h6 class="fw-bold">Password</h6>
-            <input class="input-box mb-2" type="password" name="password" placeholder="비밀번호를 입력하세요" required><br>
-        </div>
-        <div class="col-4"></div>
     </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-4"></div>
-        <div class="col-4" id="button-group">
-            <button class="join-button" type="button" onclick="joinUser();">회원가입</button>        
-        </div>
-        <div class="col-4"></div>
-    </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-4"></div>
-        <div class="col-4" id="button-group">
-            <button class="join-button" type="button" onclick="location.href='login';">로그인 하러가기</button>   
-        </div>
-        <div class="col-4"></div>
-    </div>
-   
-</form>
 </body>

@@ -95,6 +95,9 @@ router.post("/login", async (req, res) => {
 router.get("/", user.index);
 // router.post("/join", user.post_user);
 
+router.get("/join", user.get_join);
+// router.post("/join", user.post_user);
+
 router.get("/login", user.login);
 router.post("/login", user.post_login);
 
