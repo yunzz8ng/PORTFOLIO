@@ -109,6 +109,7 @@ router.put("/posts/:postId", authMiddleWare, async (req, res) => {
 router.delete("/posts/:postId", authMiddleWare, async (req, res) => {
     try {
         const { postId } = req.params;
+        console.log('delete id : ', postId)
 
         // 조기 리턴
         const _post = await Post.findByPk(postId);
