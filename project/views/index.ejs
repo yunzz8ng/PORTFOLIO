@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
+<script>
+    
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사용자 목록</title>
 </head>
 <body>
-    <h1>사용자 목록</h1>
-    <ul>
-        <% list.forEach(user => { %>
-            <li><%= user.name %> (ID: <%= user.id %>)</li> <!-- 필드 이름을 실제 DB 컬럼에 맞게 수정하세요 -->
-        <% }) %>
-    </ul>
+    <header>
+        <div class="window" style="width: 100%">
+            <div class="title-bar">
+              <div class="title-bar-text">YoonCoding</div>
+              <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+              </div>
+    </header>
+        </div>
+        <div class="window-body">
+          <p>There's so much room for activities!</p>
+        </div>
+      </div>
 </body>
 </html>

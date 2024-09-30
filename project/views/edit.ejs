@@ -40,48 +40,74 @@
 </script>
 <head>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
 </head>
 <!-- body -->
+<style>
+    .window{
+        position: fixed;
+        position: relative;
+        width: 25%;
+        height: 37%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .window-body{
+        margin-top: 1px;
+        display: flex;
+  justify-content: center;
+  align-items: center; 
+    }
+    .input-box {
+        width: 100%;
+    }
+    #button-group{
+        padding-top: 10px;
+    }
+</style>
 <body>
-<form id="join">
-    <div class="row justify-content-center mt-5">
-        <div class="col-4"></div>
-        <div class="col-4 justify-content-center" id="title">
-            <h6 class="fw-bold fs-2 mb-5 text-center">회원정보 수정</h6> 
+    <div class="window">
+        <div class="title-bar">
+          <div class="title-bar-text">회원정보 수정</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
         </div>
-        <div class="col-4"></div>
+        <div class="window-body">
+          
+            <form id="join">
+                <div class="row justify-content-center mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-4 justify-content-center" id="contents">
+                        <h5 class="fw-bold">ID</h5>
+                        <input class='input-box mb-2' type='text' name='id' value='<%=data.id%>' readonly><br>
+                        <h5 class="fw-bold">Name</h5>
+                        <input class="input-box mb-2" type="text" name="name" value="<%=data.name%>" required><br>
+                        <h5 class="fw-bold">Email</h5>
+                        <input class="input-box mb-2" type="text" name="email" value="<%=data.email%>"><br>
+                        <h5 class="fw-bold">Phone Number</h5>
+                        <input class="input-box mb-2" type="text" name="phoneNumber" value="<%=data.phoneNumber%>"><br>
+                        <h5 class="fw-bold">Password</h5>
+                        <input class="input-box mb-2" type="text" name="password" value="<%=data.password%>"><br>
+                    </div>
+                
+                <div class="row justify-content-center mt-3">
+                <br>
+                    <div class="col-4" id="button-group">
+                        &nbsp;<button class="join-button" type="button" onclick="updateUser();">회원정보수정</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="join-button" type="button" onclick="deleteUser();">회원 탈퇴</button>
+                    </div>
+                    
+                </div>
+                
+            </form>
+            <form id="form_info" action="/login" method="GET">
+            </form>
+            
+        </div>    
     </div>
-    <div class="row justify-content-center">
-        <div class="col-4"></div>
-        <div class="col-4 justify-content-center" id="contents">
-            <h6 class="fw-bold">ID</h6>
-            <input class='input-box mb-2' type='text' name='id' value='<%=data.id%>' readonly><br>
-            <h6 class="fw-bold">Name</h6>
-            <input class="input-box mb-2" type="text" name="name" value="<%=data.name%>" required><br>
-            <h6 class="fw-bold">Email</h6>
-            <input class="input-box mb-2" type="text" name="email" value="<%=data.email%>"><br>
-            <h6 class="fw-bold">Phone Number</h6>
-            <input class="input-box mb-2" type="text" name="phoneNumber" value="<%=data.phoneNumber%>"><br>
-            <h6 class="fw-bold">Password</h6>
-            <input class="input-box mb-2" type="text" name="password" value="<%=data.password%>"><br>
-        </div>
-        <div class="col-4"></div>
-    </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-4"></div>
-        <div class="col-4" id="button-group">
-            <button class="join-button" type="button" onclick="updateUser();">회원정보수정</button>
-        </div>
-        <div class="col-4"></div>
-    </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-4"></div>
-        <div class="col-4" id="button-group">
-            <button class="join-button" type="button" onclick="deleteUser();">회원 탈퇴</button>
-        </div>
-        <div class="col-4"></div>
-    </div>
-</form>
-<form id="form_info" action="/login" method="GET">
-</form>
 </body>
