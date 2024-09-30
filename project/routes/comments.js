@@ -3,7 +3,6 @@ const router = express.Router();
 
 const { Post, Comment, Like } = require("../models");
 const { Op } = require("sequelize");
-const authMiddleWare = require("../middlewares/auth-middleware");
 
 // 특정 게시글에 속한 댓글 전체 조회
 router.get("/posts/:postId/comments", async (req, res) => {
@@ -26,7 +25,7 @@ router.get("/posts/:postId/comments", async (req, res) => {
 });
 
 // 특정 게시글에 속한 댓글 작성
-router.post("/posts/:postId/comments", authMiddleWare, async (req, res) => {
+router.post("/posts/:postId/comments", async (req, res) => {
   try {
     const post_id = req.params.postId;
     const { content } = req.body;
@@ -58,7 +57,6 @@ router.post("/posts/:postId/comments", authMiddleWare, async (req, res) => {
 // 특정 게시글에 속한 특정 댓글 수정
 router.put(
   "/posts/:postId/comments/:commentId",
-  authMiddleWare,
   async (req, res) => {
     try {
       const { postId, commentId } = req.params;
@@ -98,7 +96,6 @@ router.put(
 // 특정 게시글에 속한 특정 댓글 삭제
 router.delete(
   "/posts/:postId/comments/:commentId",
-  authMiddleWare,
   async (req, res) => {
     try {
       const { postId, commentId } = req.params;

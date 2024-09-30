@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { Post, likes, User } = require("../models");
-const authMiddleWare = require("../middlewares/auth-middleware");
 
-router.get("/likes/posts", authMiddleWare, async (req, res) => {
+router.get("/likes/posts", async (req, res) => {
   const user_id = res.locals.user.userId;
   console.log(res.locals.user);
 
@@ -25,7 +24,7 @@ router.get("/likes/posts", authMiddleWare, async (req, res) => {
   res.status(200).json({ data });
 });
 
-router.put("/posts/:postId/like", authMiddleWare, async (req, res) => {
+router.put("/posts/:postId/like", async (req, res) => {
   const user_id = res.locals.user.userId;
   const { postId } = req.params;
 
@@ -56,30 +55,3 @@ router.put("/posts/:postId/like", authMiddleWare, async (req, res) => {
 });
 
 module.exports = router;
-app.js
-const express = require("express");
-const app = express();
-
-const loginRouter = require("./routers/login");
-const registerRouter = require("./routers/register");
-const postRouter = require("./routers/posts");
-const commentRouter = require("./routers/comments");
-const likesRouter = require("./routers/likes");
-
-app.use(express.json());
-
-app.use("/api", [
-  registerRouter,
-  loginRouter,
-  postRouter,
-  commentRouter,
-  likesRouter,
-]);
-
-app.get("/", (req, res) => {
-  res.send("Welcome to my page");
-});
-
-app.listen(3000, () => {
-  console.log("서버 접속");
-});
