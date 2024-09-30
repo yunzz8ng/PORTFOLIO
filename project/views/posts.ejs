@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+</head>
+<body>
+    <h1>게시판</h1>
+
+    <h2>새 게시글 작성</h2>
+    <form action="/posts" method="POST">
+        <input type="text" name="title" placeholder="제목" required>
+        <textarea name="content" placeholder="내용" required></textarea>
+        <button type="submit">제출</button>
+    </form>
+
+    <h2>전체 게시글</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작업</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(post => { %>
+                <tr>
+                    <td><%= post.title %></td>
+                    <td><%= post.content %></td>
+                    <td>
+                        <a href="/posts/<%= post.id %>">보기</a>
+                        <a href="/posts/edit/<%= post.id %>">수정</a>
+                        <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit">삭제</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

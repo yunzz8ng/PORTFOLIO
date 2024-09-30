@@ -1,0 +1,87 @@
+<!-- script -->
+<script>
+    //회원 정보 수정
+    function updateUser() {
+        var form = document.getElementById("join");
+        axios({
+           method: 'patch',
+           url: 'http://localhost:3000/edit',
+           data: {
+                id: form.id.value,
+                name: form.name.value,
+                email: form.email.value,
+                phoneNumber: form.phoneNumber.value,
+                password: form.password.value
+           } 
+        }).then((response) => { 
+            return response.data;
+        }).then((data) => {
+            console.log("회원정보 수정완료");
+            alert("수정완료");
+        });
+    }
+
+    // 회원 탈퇴
+    function deleteUser() {
+        var form = document.getElementById("join");
+        axios({
+           method: 'delete',
+           url: 'http://localhost:3000/delete',
+           data: { id: form.id.value } 
+        }).then((response) => { return response.data; })
+        .then((data) => { 
+            alert("회원 탈퇴 완료");
+
+            var form_info = document.getElementById("form_info");
+            form_info.submit();
+            
+         });
+    }
+</script>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<!-- body -->
+<body>
+<form id="join">
+    <div class="row justify-content-center mt-5">
+        <div class="col-4"></div>
+        <div class="col-4 justify-content-center" id="title">
+            <h6 class="fw-bold fs-2 mb-5 text-center">회원정보 수정</h6> 
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4"></div>
+        <div class="col-4 justify-content-center" id="contents">
+            <h6 class="fw-bold">ID</h6>
+            <input class='input-box mb-2' type='text' name='id' value='<%=data.id%>' readonly><br>
+            <h6 class="fw-bold">Name</h6>
+            <input class="input-box mb-2" type="text" name="name" value="<%=data.name%>" required><br>
+            <h6 class="fw-bold">Email</h6>
+            <input class="input-box mb-2" type="text" name="email" value="<%=data.email%>"><br>
+            <h6 class="fw-bold">Phone Number</h6>
+            <input class="input-box mb-2" type="text" name="phoneNumber" value="<%=data.phoneNumber%>"><br>
+            <h6 class="fw-bold">Password</h6>
+            <input class="input-box mb-2" type="text" name="password" value="<%=data.password%>"><br>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-4"></div>
+        <div class="col-4" id="button-group">
+            <button class="join-button" type="button" onclick="updateUser();">회원정보수정</button>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-4"></div>
+        <div class="col-4" id="button-group">
+            <button class="join-button" type="button" onclick="deleteUser();">회원 탈퇴</button>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</form>
+<form id="form_info" action="/login" method="GET">
+</form>
+</body>

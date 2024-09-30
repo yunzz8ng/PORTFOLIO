@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 목록</title>
+</head>
+<body>
+    <h1>사용자 목록</h1>
+    <ul>
+        <% list.forEach(user => { %>
+            <li><%= user.name %> (ID: <%= user.id %>)</li> <!-- 필드 이름을 실제 DB 컬럼에 맞게 수정하세요 -->
+        <% }) %>
+    </ul>
+</body>
+</html>
