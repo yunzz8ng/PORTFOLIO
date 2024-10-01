@@ -37,8 +37,8 @@
     .window{
         position: fixed;
         position: relative;
-        width: 250px;
-        height: 20%;
+        width: 100%;
+        height: 100%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -59,9 +59,13 @@
         position: absolute;
     }
     #button-group{
+        padding-top: 4em;
         justify-content: center;
         align-items: center;
         display: flex;
+    }
+    html {
+        overflow: hidden;
     }
 </style>
 <!-- body -->
@@ -72,7 +76,7 @@
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
+            <button aria-label="Close" onclick="window.close()"></button>
           </div>
         </div>
         <div class="window-body">
