@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <script>
-    
+    function openlogin(){
+      const options = 'width=250, height=250, top=50%, left= 50%'
+      window.open('http://localhost:3000/login', '_blank', options)
+    }
+
+    function openPost(){
+      const options = 'width=1000, height=600, top=50%, left= 50%'
+      window.open('http://localhost:3000/posts', '_blank', options)
+    }
 </script>
 <head>
     <meta charset="UTF-8">
@@ -14,51 +22,125 @@
   margin: 0;
   padding: 0;
 }
+body{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
 header{
   margin: auto;
-  padding-right: 1em;
   width: 100%;
   height: 5em;
   background-image: linear-gradient(to right, #010081, #008080);
   display:flex;
   align-items: center;
   justify-content: space-between;
-
+  border-width: 0.3em;
+  border-color:#c3c3c3 ;
+  border-style: groove;
+}
+footer{
+  width: 100%;
+  height: auto;
 }
 #logo{
-  margin-left: 1em;
+  padding-left: 1.6em;
   margin-top: 0.09em;
-  width: 5em;
-  height: 5em;
+  width: 4.7em;
+  height: 4.7em;
 }
 .nav {
-  padding-right: 2em;
   list-style: none;
   display: flex;
-  
+  padding-right: 1em;
 }
 .nav>li {
   padding: 0.5em;
-  width: 4.5em;
+  height: 0.5em;
+  line-height: 0.5em;
+  width: 3em;
   text-align: center;
-}
-.nav>li>p {
+  border-style: outset;
   background-color: #c3c3c3;
   box-shadow: 1px 1px 1px 1px rgb(67, 67, 67);
+  margin: 0.5em;
 }
+
+.nav>li>a{
+  text-decoration: none;
+  color: inherit;
+}
+.container{
+  border-width: 0.3em;
+  border-color:#c3c3c3 ;
+  border-style: groove;
+  width: 100%;
+  height: 85vh;
+}
+
+.main{
+  background-color: #008080;
+  width: 70%;
+  height: 85vh;
+  float: left;
+}
+.right{
+  float: right;
+  
+  width: 30%;
+  height: 40vh;
+}
+.right>img{
+  width: 100%;
+}
+.start{
+  width: 10%;
+  height: 100%;
+  background-color: #c3c3c3;
+  border-width: 0.3em;
+  border-color:#c3c3c3 ;
+  border-style: groove;
+}
+.start>img{
+  width: 100px;
+  height: auto;
+  padding: auto;
+  margin: 0;
+}
+.start>span{
+  font-size: 2em;
+  font-weight: bold;
+  padding-left: 1em;
+}
+
 </style>
 <body>
     <header>
-      <a href="#"><img src="/img/logo.png" id="logo" alt="logo"></a>
+      <a href="index.ejs"><img src="/img/logo.png" id="logo" alt="logo"></a>
       <nav>
         <ul class="nav">
-          <li><p style="border-style: outset;">ME</p></li>
-          <li><p style="border-style: outset;">BOARD</p></li>
-          <li><p style="border-style: outset;">LOGIN</p></li>
+          <li><p>ME</p></li>
+          <li><a href="#" onclick="openPost()"><p>BOARD</p></li>
+          <li><a href="#" onclick="openlogin()"><p>LOGIN</p></a></li>
         </ul>
       </nav>
     </header>
+    <div class="container">
+      <div class="main">
+        1
+      </div>
+        <div class="right">
+        
+        </div>
+          <div class="scright">
+          3
+        </div>
+        
+    </div>
       <footer>
+        <div class="start">
+          <img src="/public/img/logo.png"><span>시작</span>
+        </div>
       </footer>
 </body>
 </html>
