@@ -112,6 +112,8 @@ router.delete("/posts/:postId", authMiddleWare, async (req, res) => {
     try {
         const { postId } = req.params;
 
+        console.log(postId)
+        console.log('삭제')
         // 조기 리턴
         const _post = await Post.findByPk(postId);
         if (_post === null) {
