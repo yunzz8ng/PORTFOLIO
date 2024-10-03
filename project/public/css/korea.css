@@ -1,18 +1,15 @@
 @charset "UTF-8";
 
-
 #container {
-
     background-size: cover; /* 배경 이미지 크기 조정 */
     z-index: 0; /* container는 지도의 아래에 위치 */
     width: 100vw;
     min-height: 100vh;
     float: left;
-    margin: 0 auto;   
+    margin: 0 auto;
 }
 
 #states path {
-    
     fill: #585858;
     stroke: #000000;
     stroke-width: 1.5px;

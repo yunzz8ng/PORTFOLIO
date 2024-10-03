@@ -101,15 +101,10 @@ router.get('/logout', (req, res) => {
 
 
 router.get("/", authMiddleWare, user.index);
-// router.post("/join", user.post_user);
 
 router.get("/join", user.get_join);
-// router.post("/join", user.post_user);
 
 router.get("/login", user.login);
-
-// router.get("/edit", user.edit);
-
 
 router.get('/edit', authMiddleWare, async (req, res) => {
     const user_id = res.locals.user.id;
@@ -124,7 +119,6 @@ router.patch("/edit", user.patch_user);
 router.delete("/delete", user.delete_user);
 
 router.get('/korea', async (req, res) => {
-    console.log('korea')
     res.render('korea')
 })
 module.exports = router; 
