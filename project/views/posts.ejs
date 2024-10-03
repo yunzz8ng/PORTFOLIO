@@ -1,126 +1,113 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <link rel="stylesheet" href="https://unpkg.com/98.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
-</head>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    body{
-        background-color: #c3c3c3;
-    }
-
-    body>div{
-    width: 100%;
-    height: auto;
-    }
-    th{
-        width: 100%;
-    }
-    .window{
-        padding: 0;
-        margin: 0;
-    }
-    .window-body{
-        display: flex;
-    }
-    .sunken-panel{
-        margin-left: 2em;
-    }
-    textarea{
-        height: 26.7em;
-    }
-</style>
-<body>
-    <div class="window"></div>
-        <div class="title-bar">
-          <div class="title-bar-text">Board</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close" onclick="window.close()"></button>
-          </div>
-        </div>
-        <div class="window-body">
-            <form action="/posts" method="POST">
-        <p>새 게시글 작성</p>
-        <input type="text" name="title" placeholder="제목" required>
-        <div class="field-row-stacked" style="width: 30em">
-            <label></label>
-            <textarea name="content" placeholder="내용" required></textarea></div>
-            <br>
-            <button type="submit">제출</button>
-    </form>
-
-    <div class="sunken-panel" style="height: 30em; width: 45em;">
-        <table class="interactive">
-        <thead>
-            <tr>
-                <th>제목</th>
-                <th>내용</th>
-                <th>작업</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% posts.forEach(post => { %>
     <head>
+        <link rel="stylesheet" href="https://unpkg.com/98.css" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>게시판</title>
     </head>
-    <body>
-        <h1>게시판</h1>
-
-        <h2>새 게시글 작성</h2>
-        <form action="/posts" method="POST">
-            <input type="text" name="title" placeholder="제목" required />
-            <textarea name="content" placeholder="내용" required></textarea>
-            <button type="submit">제출</button>
-        </form>
-
-        <h2>전체 게시글</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>제목</th>
-                    <th>내용</th>
-                    <th>작업</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% posts.forEach(post => { %>
-                <tr>
-                    <td><%= post.title %></td>
-                    <td><%= post.content %></td>
-                    <td>
-                        <a href="/posts/<%= post.id %>">보기</a>
-                        <a href="/posts/edit/<%= post.id %>">수정</a>
-                        <form
-                            action="/posts/<%= post.id %>?_method=DELETE"
-                            method="POST"
-                            style="display: inline"
-                        >
-                            <button type="submit">삭제</button>
-                        </form>
-                    </td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
-  </div>
-</div>
-  <script>
-    document.querySelectorAll('table.interactive').forEach(element => {
-      element.addEventListener('click', (event) => {
-        const row = event.path.find(element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY');
-        if (row) {
-          row.classList.toggle('highlighted');
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
         }
-      })
-    });
-  </script>
+        body {
+            background-color: #c3c3c3;
+        }
+
+        body > div {
+            width: 100%;
+            height: auto;
+        }
+        th {
+            width: 100%;
+        }
+        .window {
+            padding: 0;
+            margin: 0;
+        }
+        .window-body {
+            display: flex;
+        }
+        .sunken-panel {
+            margin-left: 2em;
+        }
+        textarea {
+            height: 26.7em;
+        }
+    </style>
+    <body>
+        <div class="window"></div>
+        <div class="title-bar">
+            <div class="title-bar-text">Board</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close" onclick="window.close()"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <form action="/posts" method="POST">
+                <p>새 게시글 작성</p>
+                <input type="text" name="title" placeholder="제목" required />
+                <div class="field-row-stacked" style="width: 30em">
+                    <label></label>
+                    <textarea
+                        name="content"
+                        placeholder="내용"
+                        required
+                    ></textarea>
+                </div>
+                <br />
+                <button type="submit">제출</button>
+            </form>
+
+            <div class="sunken-panel" style="height: 30em; width: 45em">
+                <table class="interactive">
+                    <thead>
+                        <tr>
+                            <th>제목</th>
+                            <th>내용</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% posts.forEach(post => { %>
+                        <tr>
+                            <td><%= post.title %></td>
+                            <td><%= post.content %></td>
+                            <td>
+                                <a href="/posts/<%= post.id %>">보기</a>
+                                <a href="/posts/edit/<%= post.id %>">수정</a>
+                                <form
+                                    action="/posts/<%= post.id %>?_method=DELETE"
+                                    method="POST"
+                                    style="display: inline"
+                                >
+                                    <button type="submit">삭제</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            document
+                .querySelectorAll("table.interactive")
+                .forEach((element) => {
+                    element.addEventListener("click", (event) => {
+                        const row = event.path.find(
+                            (element) =>
+                                element.tagName === "TR" &&
+                                element.parentElement.tagName === "TBODY"
+                        );
+                        if (row) {
+                            row.classList.toggle("highlighted");
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>

@@ -2,7 +2,15 @@ const User = require("../models/User");
 
 //메인화면=회원가입화면
 exports.index = (req, res) => {
-    res.render("index");
+
+    const user = res.locals.user;
+    if (user) {
+        console.log(user);
+        res.render("index", { user });
+    } else {
+        res.render('index', { user: null })
+    }
+
 }
 exports.get_join = (req, res) => {
     res.render("join");

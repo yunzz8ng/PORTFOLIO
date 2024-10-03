@@ -43,14 +43,14 @@ router.post('/join', async (req, res) => {
             return res.status(412).send({ "message": "중복된 아이디입니다." })
         }
 
-        const a =  await User.create({
+        const a = await User.create({
             id: id,
             name: name,
             phoneNumber: phoneNumber,
             password: password,
             email: email
         })
-        
+
         console.log('성공')
 
 
@@ -87,7 +87,6 @@ router.post("/login", async (req, res) => {
         );
 
         res.cookie("token", token);
-
         return res.json({ token: token });
     } catch (err) {
         console.log(err);
@@ -95,15 +94,19 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/')
+})
 
-router.get("/", user.index);
+
+router.get("/", authMiddleWare, user.index);
 // router.post("/join", user.post_user);
 
 router.get("/join", user.get_join);
 // router.post("/join", user.post_user);
 
 router.get("/login", user.login);
-router.post("/login", user.post_login);
 
 // router.get("/edit", user.edit);
 
@@ -113,14 +116,14 @@ router.get('/edit', authMiddleWare, async (req, res) => {
     const user = await User.findByPk(user_id)
 
     console.log(user);
-    res.render('edit', { data: user.dataValues})
+    res.render('edit', { data: user.dataValues })
 })
 
 router.post("/edit", user.edit);
 router.patch("/edit", user.patch_user);
 router.delete("/delete", user.delete_user);
 
-router.get('/korea', async(req, res) => {
+router.get('/korea', async (req, res) => {
     console.log('korea')
     res.render('korea')
 })
