@@ -126,7 +126,7 @@ router.delete("/posts/:postId", authMiddleWare, async (req, res) => {
             where: { post_id: postId },
         });
 
-        res.send("삭제완료!");
+        res.redirect('/posts');
     } catch (error) {
         console.error(error);
 
