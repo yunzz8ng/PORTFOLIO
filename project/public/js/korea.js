@@ -7,7 +7,7 @@ function drawMap(target) {
     var width = 1000; //지도의 넓이
     var height = 1000; //지도의 높이
     var initialScale = 5500; //확대시킬 값
-    var initialX = -11432; //초기 위치값 X
+    var initialX = -11850; //초기 위치값 X
     var initialY = 4150; //초기 위치값 Y
     var labels;
 
@@ -16,12 +16,13 @@ function drawMap(target) {
         .scale(initialScale)
         .translate([initialX, initialY]);
     var path = d3.geo.path().projection(projection);
+    
     var zoom = d3.behavior
         .zoom()
         .translate(projection.translate())
         .scale(projection.scale())
         .scaleExtent([height, 800 * height])
-        .on('zoom', zoom);
+        // .on('zoom', zoom);
 
     var svg = d3
         .select(target)
@@ -42,7 +43,7 @@ function drawMap(target) {
         .attr('class', 'background')
         .attr('width', width + '%')
         .attr('height', height + 'vh')
-        .attr('fill', 'white');
+        .attr('fill', '#008080');
 
     //geoJson데이터를 파싱하여 지도그리기
     d3.json('js/korea.json', function(json) {

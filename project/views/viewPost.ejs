@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <style>
+        @font-face {
+            font-family: 'DungGeunMo';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        *{
+            font-family: 'DungGeunMo';
+        }
+        body {
+            background-color: #c3c3c3;
+        }
+        .post-container {
+            padding: 1em;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin: 2em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="window"></div>
+    <div class="title-bar">
+      <div class="title-bar-text">View Post</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close" onclick="location.href='http://localhost:3000/posts'"></button>
+      </div>
+    </div>
+    <div class="window-body">
+        <p><strong style="font-size: 1.2em;">제목</strong> <%= post.title %></p>
+        <p><strong style="font-size: 1.2em;">작성자</strong> <%= post.user_id %></p>
+        <p><strong style="font-size: 1.2em;">내용</strong></p>
+        <div style="margin-bottom:1em; padding:0.3em; background-color:white; width: 20em; height: 20em;"><p style="font-size: 1.2em;"><%= post.content %></p></div>
+        <form action="/posts/edit/<%= post.id %>"style="display: inline;"><button type="submit">수정</button></form>
+        <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit">삭제</button>
+        </form>
+        <form action="/posts"style="display:inline;"><button type="submit">목록으로 돌아가기</button></form>
+        
+    </div>
+</body>
+</html>  
