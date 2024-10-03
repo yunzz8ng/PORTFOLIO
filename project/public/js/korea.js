@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     drawMap('#container');
 };
 
@@ -7,7 +7,7 @@ function drawMap(target) {
     var width = 1000; //지도의 넓이
     var height = 1000; //지도의 높이
     var initialScale = 5500; //확대시킬 값
-    var initialX = -11850; //초기 위치값 X
+    var initialX = -12000; //초기 위치값 X
     var initialY = 4150; //초기 위치값 Y
     var labels;
 
@@ -16,13 +16,13 @@ function drawMap(target) {
         .scale(initialScale)
         .translate([initialX, initialY]);
     var path = d3.geo.path().projection(projection);
-    
+
     var zoom = d3.behavior
         .zoom()
         .translate(projection.translate())
         .scale(projection.scale())
         .scaleExtent([height, 800 * height])
-        // .on('zoom', zoom);
+    // .on('zoom', zoom);
 
     var svg = d3
         .select(target)
@@ -46,16 +46,21 @@ function drawMap(target) {
         .attr('fill', '#008080');
 
     //geoJson데이터를 파싱하여 지도그리기
-    d3.json('js/korea.json', function(json) {
+    d3.json('js/korea.json', function (json) {
         states
             .selectAll('path') //지역 설정
             .data(json.features)
             .enter()
             .append('path')
             .attr('d', path)
-            .attr('id', function(d) {
+            .attr('class', 'map-path')
+            .attr('id', function (d) {
                 return 'path-' + d.properties.name_eng;
+            }).on('click', (e) => {
+                console.log(e.properties.name)
+                alert(e.properties.name);
             });
+
 
         labels = states
             .selectAll('text')
@@ -63,13 +68,16 @@ function drawMap(target) {
             .enter()
             .append('text')
             .attr('transform', translateTolabel)
-            .attr('id', function(d) {
+            .attr('id', function (d) {
                 return 'label-' + d.properties.name_eng;
             })
             .attr('text-anchor', 'middle')
             .attr('dy', '.35em')
-            .text(function(d) {
+            .text(function (d) {
                 return d.properties.name;
+            }).on('click', (e) => {
+                console.log(e.properties.name)
+                alert(e.properties.name);
             });
     });
 

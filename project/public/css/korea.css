@@ -1,24 +1,23 @@
 @charset "UTF-8";
 @font-face {
-    font-family: 'DungGeunMo';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-family: "DungGeunMo";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
+        format("woff");
     font-weight: normal;
     font-style: normal;
 }
 
 #container {
-
-    background-size:cover; /* 배경 이미지 크기 조정 */
+    background-size: cover; /* 배경 이미지 크기 조정 */
     z-index: 0; /* container는 지도의 아래에 위치 */
     width: 100vw;
     min-height: 100vh;
     float: left;
-    margin: 0;   
+    margin: 0;
 }
 
 #states path {
-    
-    fill:#c3c3c3;
+    fill: #c3c3c3;
     stroke: #000000;
     stroke-width: 0.5px;
 }
@@ -41,7 +40,7 @@
 
 #states text {
     cursor: pointer;
-    font-family: 'DungGeunMo';
+    font-family: "DungGeunMo";
     font-size: 1em;
     fill: black;
 }

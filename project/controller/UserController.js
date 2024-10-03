@@ -5,7 +5,6 @@ exports.index = (req, res) => {
 
     const user = res.locals.user;
     if (user) {
-        console.log(user);
         res.render("index", { user });
     } else {
         res.render('index', { user: null })
