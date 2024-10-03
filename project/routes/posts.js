@@ -116,7 +116,6 @@ router.put("/posts/:postId", async (req, res) => {
 router.delete("/posts/:postId", async (req, res) => {
   try {
     const { postId } = req.params;
-
     // 조회 실패
     Post.findById(req.params, (result) => {
       if (!result) {

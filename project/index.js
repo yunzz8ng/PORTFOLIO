@@ -5,8 +5,7 @@ const PORT = 3000;
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const { sequelize, User, Post, Comment, Likes } = require('./models/index');
-const methodOverride = require('method-override');
-
+const methodOverride = require('method-override')
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));

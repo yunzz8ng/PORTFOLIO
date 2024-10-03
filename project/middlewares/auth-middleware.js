@@ -3,7 +3,7 @@ const { User } = require("../models/index");
 const SECRET_KEY = "yunzzang";
 
 module.exports = (req, res, next) => {
-    const token = req.headers.cookie.split("token=")[1];
+    const token = req.headers.cookie ? req.headers.cookie.split("token=")[1] : null;
     if (!token) {
         if (req.url == '/') {
             return next();
