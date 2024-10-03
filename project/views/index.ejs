@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <script>
+  
     function openlogin(){
       const options = 'width=250, height=250, top=50%, left= 50%'
       window.open('http://localhost:3000/login', '_blank', options)
     }
 
     function openPost(){
-      const options = 'width=1000, height=600, top=50%, left= 50%'
+      const options = 'width=950, height=450, top=50%, left= 50%'
       window.open('http://localhost:3000/posts', '_blank', options)
+    }
+
+    function updateUser(){
+      const options = 'width=300, height=500, top=50%, left= 50%'
+      window.open('http://localhost:3000/edit', '_blank', options)
+    }
+    
+    function openMap(){
+      const options = 'width=300, height=500, top=50%, left= 50%'
+      window.open('http://localhost:3000/korea', '_blank', options)
+    }
+
+    function openMe(){
+      const options = 'width=1000, height=1000, top=50%, left= 50%'
+      window.open('https://yunzzang-c.tistory.com/', '_blank', options)
     }
 </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/png" href="/img/logo.png">
-    <title>project</title>
+    <title>PRoGRAM</title>
 </head>
 <style>
+  @font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 *{
   margin: 0;
   padding: 0;
@@ -38,10 +60,14 @@ header{
   border-width: 0.3em;
   border-color:#c3c3c3 ;
   border-style: groove;
+  font-family: 'DungGeunMo';
+  font-size: 1em;
 }
 footer{
   width: 100%;
   height: auto;
+  display: flex;
+  justify-content: space-between;
 }
 #logo{
   padding-left: 1.6em;
@@ -86,61 +112,226 @@ footer{
 }
 .right{
   float: right;
-  
-  width: 30%;
+  border-style: outset;
+  width: 29.7%;
   height: 40vh;
+  padding: 0;
+  margin: 0;
+  border-width: 0.1em;
+
 }
-.right>img{
+#right-bar{
   width: 100%;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to right, 	#818181, #c3c3c3);
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  border-color:#c3c3c3 ;
+  border-style: groove;
+  border-width: 0.2em;
+  font-family: 'DungGeunMo';
+  font-size: 0.7em;
+}
+#right-bar-menu{
+  color:#c3c3c3
 }
 .start{
-  width: 10%;
+  width: 5%;
   height: 100%;
   background-color: #c3c3c3;
   border-width: 0.3em;
-  border-color:#c3c3c3 ;
   border-style: groove;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  position: relative;
+}
+.start-content{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 100%;
+  width: 200%;
+  z-index: 1;
+  border: 1px outset #ccc;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+  overflow: auto;
+  
+}
+.start-content a {
+  font-family: 'DungGeunMo';
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: black;
+  background-color: #c3c3c3;
+  border-bottom: 2px groove #e5e5e5;
+}
+
+.start-content a:last-child {
+  border-bottom: none; /* Remove the bottom border for the last link */
+}
+
+.start-content a:hover {
+  background-color: #818181;
+}
+
+/* Show the start when hovering over the .start container */
+.start:hover .start-content {
+  display: block;
+}
+.start button::after {
+  content: '';                     /* Clear content */
+  border-left: 5px outset transparent;   /* Left arrow slant */
+  border-right: 5px outset transparent;  /* Right arrow slant */
+  border-top: 5px outset #000;          /* Top border color and size */
+  display: inline-block;           /* Allow it to sit next to the text */
+  margin-left: 10px;   /* Space between the text and the arrow */
+  margin-top: -5px;
+  vertical-align: middle;          /* Vertically align the arrow */
+}
+
+.start button {
+  padding: 8px 16px;
+    border: 1px outset #ccc;
+    border-radius: 4px;
+    background-color: #c3c3c3;
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+    transition: background-color 0.2s;
 }
 .start>img{
-  width: 100px;
+  width: 3.5em;
   height: auto;
   padding: auto;
   margin: 0;
+  
 }
-.start>span{
-  font-size: 2em;
-  font-weight: bold;
-  padding-left: 1em;
+.start:hover{
+  border-style: inset;
+  border-width: 0.3em;
 }
 
+.main>div{
+  padding: 1.8em;
+}
+
+.icons {
+  width: 10%;
+  height: 3em;
+  text-align: center;
+  display: flex; /* Flexbox 사용 */
+  flex-direction: column; /* 수직 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  padding: 1em;
+  margin: 2em;
+  margin-top: 3em;
+  font-family: 'DungGeunMo';
+  font-size: 1.2em;
+}
+.icons>img{
+  display: block;
+  padding: 1em;
+  width: 3.5em;
+  height: 3.5em;
+}
+#time{
+  width: 10%;
+  font-size: 1.5em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #c3c3c3;
+  border-style: groove;
+  border-width: 2px;
+}
+.loading{
+  background-color: #c3c3c3;
+  width: 85%;
+  border-style: groove;
+}
+#juso>input{
+  border-style: outset;
+  border-width: 0.1em;
+  height: 0.7em;
+}
+#juso>input:focus{
+  outline: none;
+}
 </style>
 <body>
     <header>
       <a href="index.ejs"><img src="/img/logo.png" id="logo" alt="logo"></a>
       <nav>
         <ul class="nav">
-          <li><p>ME</p></li>
-          <li><a href="#" onclick="openPost()"><p>BOARD</p></li>
+          <li><a href="#" onclick="updateUser()"><p>MYPAGE</p></a></li>
+          <li><a href="#" onclick="openPost()"><p>BOARD</p></a></li>
           <li><a href="#" onclick="openlogin()"><p>LOGIN</p></a></li>
         </ul>
       </nav>
     </header>
     <div class="container">
       <div class="main">
-        1
+        <a href="#" onclick="openMe()"><div class="icons"><img src="/img/pngegg.png"><span>me</span></div></a>
+        <a href="#" onclick="openMap()"><div class="icons"><img src="/img/program.png"><span>program</span></div></a>
+        <a href="#" onclick=""><div class="icons"><img src="/img/dib.png"><span>dibs</span></div></a>
       </div>
         <div class="right">
-        
-        </div>
-          <div class="scright">
-          3
+          <div id="right-bar">
+            <div id="right-bar-menu">
+            파일(F) 편집(E) 보기(V) 이동(G) 즐겨찾기(A)
+            </div>
+            <br>
+          </div>
+          <div id="right-bar">
+          <div id="juso">
+            주소 <span style="background-color: #ffffff; outline:none;">&nbspC:₩&nbsp</span><input type="text" autofocus>
+            </div>
+          </div>
+          <div class="profileImg"><img src="/img/logo.png"/></div>
+          <div>
+            <p>yunzzang님 환영합니다.</p>
+          </div>
         </div>
         
     </div>
       <footer>
         <div class="start">
-          <img src="/public/img/logo.png"><span>시작</span>
+          <img type="button" src="/img/logo.png">
+          <div class="start-content">
+            <a href="#">ME(F)</a>
+            <a href="#">PROGRAM(R)...</a>
+            <a href="#">DIBS(L)...</a>
+            <a href="#">시스템 종료(U)...</a>
+          </div>
+        </div>
+        <div class="loading">
+
+        </div>
+        <div id = "time">
+          <input type="date" />
         </div>
       </footer>
+      <script>
+        
+      const currentDate = new Date();
+      const hours = currentDate.getHours();
+      const minutes = currentDate.getMinutes();
+
+      const formattedDate = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+      document.getElementById('time').innerText = formattedDate;
+      
+      
+    </script>
+    
 </body>
 </html>

@@ -4,22 +4,50 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/98.css">
         <title>게시글 수정</title>
     </head>
+    <style>
+
+        body{
+            background-color: #c3c3c3;
+
+        }
+        .window{
+            padding: 0;
+            margin: 0;
+        }
+        textarea{
+            width: 30em;
+            height: 30em;
+        }
+    </style>
     <body>
-        <h1>게시글 수정</h1>
+        <div class="window"></div>
+        <div class="title-bar">
+          <div class="title-bar-text">게시글 수정</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" onclick="window.close()"></button>
+          </div>
+        </div>
+        
         <form
             id="editForm"
             action="/posts/<%= post.id %>?_method=PUT"
             method="POST"
-        >
+        ><br>
+        
             <input
                 type="text"
                 name="title"
                 value="<%= post.title %>"
                 required
-            />
+            /><br><br>
             <textarea name="content" required><%= post.content %></textarea>
+            <br>
+            <br>
             <button type="submit">업데이트</button>
         </form>
     </body>

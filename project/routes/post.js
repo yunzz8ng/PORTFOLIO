@@ -58,13 +58,15 @@ router.post("/posts", authMiddleWare, async (req, res) => {
     const { title, content } = req.body;
     const user_id = res.locals.user.id;
     try {
-        const posts = await Post.create({
+        const post = await Post.create({
             title,
             content,
             user_id,
         });
 
-        res.send(posts);
+        const posts = await Post.findAll({ order: [["createdAt", "desc"]] });
+        res.render("posts", { posts });
+        // res.json(posts);
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: error.message });
