@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/98.css" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>게시판</title>
+    </head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #c3c3c3;
+        }
+
+        body > div {
+            width: 100%;
+            height: auto;
+        }
+        th {
+            width: 100%;
+        }
+        .window {
+            padding: 0;
+            margin: 0;
+        }
+        .window-body {
+            display: flex;
+        }
+        .sunken-panel {
+            margin-left: 2em;
+        }
+    </style>
+    <body>
+        <div class="window"></div>
+        <div class="title-bar">
+            <div class="title-bar-text">Board</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close" onclick="window.close()"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="sunken-panel" style="height: 50em; width: 60em">
+                <table class="interactive">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>축제 이름</th>
+                            <th>찜한날짜</th>
+                            <th>찜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% dibs.forEach(dib => { %>
+                        <tr>
+                            <td><%= dib.dib_id %></td>
+                            <td><%= dib.festival.festival_title %></td>
+                            <td><%= dib.createdAt %></td>
+                            <td><input type="button" value="삭제" /></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            document
+                .querySelectorAll("table.interactive")
+                .forEach((element) => {
+                    element.addEventListener("click", (event) => {
+                        const row = event.path.find(
+                            (element) =>
+                                element.tagName === "TR" &&
+                                element.parentElement.tagName === "TBODY"
+                        );
+                        if (row) {
+                            row.classList.toggle("highlighted");
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>

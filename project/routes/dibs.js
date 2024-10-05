@@ -46,7 +46,7 @@ router.post('/dibs', authMiddleware, async (req, res) => {
 
 })
 
-router.get('/dibs', authMiddleware, async (req, res) => {
+router.get('/api/dibs', authMiddleware, async (req, res) => {
     const userId = res.locals.user.id;
 
     const dibs = await Dibs.findAll({
@@ -64,6 +64,24 @@ router.get('/dibs', authMiddleware, async (req, res) => {
         success: true,
         result: result
     })
+})
+
+router.get('/dibs', authMiddleware, async (req, res) => {
+    const userId = res.locals.user.id;
+
+    const _dibs = await Dibs.findAll({
+        where: {
+            user_id: userId,
+        },
+        include: [{
+            model: Festival
+        }]
+    })
+    const dibs = _dibs.map((item) => {
+        return item.dataValues;
+    })
+
+    res.render('dibs', { dibs })
 })
 
 
