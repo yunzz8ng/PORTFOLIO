@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('my_db', 'root', 'wjddbswjd75.', {
+const sequelize = new Sequelize('my_db', 'useruser', 'wjddbswjd75.', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -104,6 +104,78 @@ const Likes = sequelize.define('Likes', {
     timestamps: true,
 });
 
+const Festival = sequelize.define('festival', {
+    festival_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    festival_title: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+    },
+    festival_description: {
+        type: DataTypes.STRING(2000),
+        allowNull: true
+    },
+    festival_local: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+    },
+    festival_place: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+    },
+    festival_img: {
+        type: DataTypes.BLOB,
+        allowNull: true
+    },
+    festival_start_date: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    festival_end_date: {
+        type: DataTypes.DATE,
+        allowNull: true
+    }
+}, {
+    sequelize, // passing the `sequelize` instance is required
+    modelName: 'Festival',
+    tableName: 'festival',
+    timestamps: true // Set to true if you want Sequelize to handle createdAt/updatedAt
+});
+
+const Dibs = sequelize.define('dibs', {
+    dib_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        autoIncrement: true
+    },
+    festival_id: {
+        type: DataTypes.STRING(45),
+        allowNull: true,
+        references: {
+            model: 'Festival',
+            key: 'festival_id'
+        }
+    },
+    user_id: {
+        type: DataTypes.STRING(45),
+        allowNull: true,
+        references: {
+            model: 'User',
+            key: 'id'
+        }
+    }
+}, {
+    sequelize,
+    modelName: 'Dibs',
+    tableName: 'dibs',
+    timestamps: true // Adjust if you want createdAt/updatedAt
+});
+
 // 관계 설정
 User.hasMany(Post, { foreignKey: 'user_id' });
 Post.belongsTo(User, { foreignKey: 'user_id' });
@@ -121,6 +193,9 @@ Likes.belongsTo(User, { foreignKey: 'user_id' });
 Likes.belongsTo(Post, { foreignKey: 'post_id' });
 Likes.belongsTo(Comment, { foreignKey: 'comment_id' });
 
+Festival.belongsToMany(User, { through: Dibs, foreignKey: 'festival_id' });
+User.belongsToMany(Festival, { through: Dibs, foreignKey: 'user_id' });
+
 // 데이터베이스 동기화
 const syncDatabase = async () => {
     try {
@@ -133,4 +208,4 @@ const syncDatabase = async () => {
 
 syncDatabase();
 
-module.exports = { User, Post, Comment, Likes, sequelize };
+module.exports = { User, Post, Comment, Likes, Festival, Dibs, sequelize };
