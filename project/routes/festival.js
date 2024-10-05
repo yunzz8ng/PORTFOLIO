@@ -8,10 +8,6 @@ router.get('/festival/:local', authMiddleware, async (req, res) => {
 
     const local = getLocal(req.params.local);
 
-    console.log('local')
-    console.log(local)
-
-
     const userId = res.locals.user.id;
 
     let searchFestival = await Festival.findAll({
@@ -46,6 +42,47 @@ router.get('/festival/:local', authMiddleware, async (req, res) => {
         };
     });
     res.render('festivalList', { festivals: result })
+})
+
+router.post('/festival/dibs', authMiddleware, async (req, res) => {
+
+    const festivalId = req.body.festivalId;
+    const userId = res.locals.user.id;
+
+
+    const dibs = await Dibs.findOne({
+        where: {
+            user_id: userId,
+            festival_id: festivalId
+        }
+    })
+
+    if (dibs && dibs.dataValues) {
+        let result = await Dibs.destroy({
+            where: {
+                user_id: userId,
+                festival_id: festivalId
+            }
+        })
+
+        res.json({
+            success: true,
+            message: '찜 삭제',
+            result: result
+        })
+    } else {
+
+        let result = await Dibs.create({
+            user_id: userId,
+            festival_id: festivalId
+        })
+
+        res.json({
+            success: true,
+            message: '찜 생성',
+            result: result
+        })
+    }
 })
 
 const getLocal = (local) => {

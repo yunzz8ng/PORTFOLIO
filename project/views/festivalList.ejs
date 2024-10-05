@@ -86,7 +86,7 @@
             const dib = async (festivalId) => {
                 const postDib = await axios({
                     method: 'post',
-                    url: 'http://localhost:3000/dibs',
+                    url: 'http://localhost:3000/festival/dibs',
                     data: { festivalId: festivalId } 
                  })
                  console.log(postDib.data);

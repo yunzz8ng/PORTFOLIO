@@ -2,6 +2,7 @@
 <html lang="ko">
     <head>
         <link rel="stylesheet" href="https://unpkg.com/98.css" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>게시판</title>
@@ -55,12 +56,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% dibs.forEach(dib => { %>
+                        <% dibs.forEach((dib, i) => { %>
                         <tr>
-                            <td><%= dib.dib_id %></td>
+                            <td><%= i + 1%></td>
                             <td><%= dib.festival.festival_title %></td>
                             <td><%= dib.createdAt %></td>
-                            <td><input type="button" value="삭제" /></td>
+                            <!-- <td><input type="button" value="삭제" /></td> -->
+                            <td>
+                                <button onclick="deleteDib(<%= dib.dib_id %>)">
+                                    삭제
+                                </button>
+                            </td>
                         </tr>
                         <% }) %>
                     </tbody>
@@ -68,20 +74,16 @@
             </div>
         </div>
         <script>
-            document
-                .querySelectorAll("table.interactive")
-                .forEach((element) => {
-                    element.addEventListener("click", (event) => {
-                        const row = event.path.find(
-                            (element) =>
-                                element.tagName === "TR" &&
-                                element.parentElement.tagName === "TBODY"
-                        );
-                        if (row) {
-                            row.classList.toggle("highlighted");
-                        }
-                    });
+            const deleteDib = async (dibId) => {
+                const postDib = await axios({
+                    method: "post",
+                    url: "http://localhost:3000/dibs",
+                    data: { dibId: dibId },
                 });
+                console.log(postDib.data);
+                alert(postDib.data.message);
+                location.reload();
+            };
         </script>
     </body>
 </html>
