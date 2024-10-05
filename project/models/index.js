@@ -196,6 +196,8 @@ Likes.belongsTo(Comment, { foreignKey: 'comment_id' });
 Festival.belongsToMany(User, { through: Dibs, foreignKey: 'festival_id' });
 User.belongsToMany(Festival, { through: Dibs, foreignKey: 'user_id' });
 
+Dibs.belongsTo(Festival, { foreignKey: 'festival_id' });
+Dibs.belongsTo(User, { foreignKey: 'user_id' });
 // 데이터베이스 동기화
 const syncDatabase = async () => {
     try {

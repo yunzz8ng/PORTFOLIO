@@ -3,7 +3,7 @@ const router = express.Router();
 const { Post, likes, User } = require("../models");
 
 router.get("/likes/posts", async (req, res) => {
-  const user_id = res.locals.user.userId;
+  const user_id = res.locals.user.id;
   console.log(res.locals.user);
 
   const data = await likes.findAll({
@@ -25,7 +25,7 @@ router.get("/likes/posts", async (req, res) => {
 });
 
 router.put("/posts/:postId/like", async (req, res) => {
-  const user_id = res.locals.user.userId;
+  const user_id = res.locals.user.id;
   const { postId } = req.params;
 
   const existlike = await likes.findOne({

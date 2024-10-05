@@ -1,31 +1,45 @@
 const express = require("express");
+const { Festival, Dibs } = require("../models");
 const router = express.Router();
 
 
-router.get('/festival/:local', (req, res) => {
+router.get('/festival/:local', async (req, res) => {
 
     const local = req.params.local;
-    console.log(local);
-    const festivals = [
-        { 
-        id: 1,
-        title: `${local} 페스티벌`,
-        description: `${local} 최대 규모의 축제`,
-        local: `${local}`,
-        startDate: '2024-10-20',
-        endDate: '2024-12-19',
-        isDib: false,
-        }, { 
-        id: 2,
-        title: `${local} 페스티벌`,
-        description: `${local} 최대 규모의 축제 2`,
-        local: `${local}`,
-        startDate: '2024-10-20',
-        endDate: '2024-12-30',
-        isDib: true,
+    const userId = 'wook';
+
+    let searchFestival = await Festival.findAll({
+        where: {
+            festival_local: local
+        },
+        order: [['festival_start_date', 'ASC']]
+    })
+
+    const ids = searchFestival.map((item) => {
+        return item.dataValues.festival_id;
+    })
+
+    const dibs = await Dibs.findAll({
+        where: {
+            festival_id: ids,
+            user_id: userId
         }
-    ]
-    res.render('festivalList', { festivals: festivals })
+    })
+
+    const dibsMap = {};
+    dibs.forEach(dib => {
+        dibsMap[dib.festival_id] = dib.dib_id; // festival_id를 키로 dib_id 저장
+    });
+
+    const result = searchFestival.map(festival => {
+        return {
+            ...festival.dataValues,
+            isDib: dibsMap[festival.festival_id] ? true : false // Dibs 정보 추가
+        };
+    });
+
+    console.log(result);
+    res.render('festivalList', { festivals: result })
 })
 
 module.exports = router;

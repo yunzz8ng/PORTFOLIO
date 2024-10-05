@@ -29,7 +29,7 @@ router.post("/posts/:postId/comments", async (req, res) => {
   try {
     const post_id = req.params.postId;
     const { content } = req.body;
-    const user_id = res.locals.user.userId;
+    const user_id = res.locals.user.id;
 
     // 조기 리턴
     const post = await Post.findByPk(post_id);
