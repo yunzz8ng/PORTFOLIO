@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('my_db', 'useruser', 'wjddbswjd75.', {
+const sequelize = new Sequelize('my_db', 'root', 'wjddbswjd75.', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -116,11 +116,11 @@ const Festival = sequelize.define('festival', {
         allowNull: true
     },
     festival_start_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING(45),
         allowNull: true
     },
     festival_end_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING(45),
         allowNull: true
     },
     festival_description: {
