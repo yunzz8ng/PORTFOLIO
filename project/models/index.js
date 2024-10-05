@@ -112,23 +112,7 @@ const Festival = sequelize.define('festival', {
         allowNull: false
     },
     festival_title: {
-        type: DataTypes.STRING(45),
-        allowNull: true
-    },
-    festival_description: {
-        type: DataTypes.STRING(2000),
-        allowNull: true
-    },
-    festival_local: {
-        type: DataTypes.STRING(45),
-        allowNull: true
-    },
-    festival_place: {
-        type: DataTypes.STRING(45),
-        allowNull: true
-    },
-    festival_img: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING(200),
         allowNull: true
     },
     festival_start_date: {
@@ -138,7 +122,25 @@ const Festival = sequelize.define('festival', {
     festival_end_date: {
         type: DataTypes.DATE,
         allowNull: true
-    }
+    },
+    festival_description: {
+        type: DataTypes.STRING(1000),
+        allowNull: true
+    },
+    festival_tel: {
+        type: DataTypes.STRING(100),
+        allowNull: true
+    },
+    festival_place: {
+        type: DataTypes.STRING(200),
+        allowNull: true
+    },
+    festival_local: {
+        type: DataTypes.STRING(200),
+        allowNull: true
+    },
+
+
 }, {
     sequelize, // passing the `sequelize` instance is required
     modelName: 'Festival',
