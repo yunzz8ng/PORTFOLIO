@@ -2,6 +2,7 @@
 <html lang="ko">
     <head>
         <link rel="stylesheet" href="https://unpkg.com/98.css" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>게시판</title>
@@ -10,6 +11,7 @@
         * {
             padding: 0;
             margin: 0;
+            font-size: 1.1em;
         }
         body {
             background-color: #c3c3c3;
@@ -20,7 +22,7 @@
             height: auto;
         }
         th {
-            width: 100%;
+            width: 5em;
         }
         .window {
             padding: 0;
@@ -45,27 +47,34 @@
             </div>
         </div>
         <div class="window-body">
-            <div class="sunken-panel" style="height: 50em; width: 60em">
+            <div class="sunken-panel" style="height: 50em; width: 85em">
                 <table class="interactive">
                     <thead>
                         <tr>
+                            <th>찜</th> 
                             <th>제목</th>
                             <th>내용</th>
                             <th>지역</th>
                             <th>축제날짜</th>
-                            <th>찜</th>
+                            <th>문의전화</th>
+                            <!-- isDib -->
                         </tr>
                     </thead>
                     <tbody>
                         <% festivals.forEach(festival => { %>
                         <tr>
-                            <td><%= festival.title %></td>
-                            <td><%= festival.description %></td>
-                            <td><%= festival.local %></td>
-                            <td><%= festival.startDate %> ~ <%= festival.endDate %></td>
                             <td>
-                                <input type="checkbox" name="isDib"/>
+                                <% if (festival.isDib) { %>
+                                    <input type="checkbox" checked onclick="dib(<%= festival.festival_id %>)" id=<%= festival.festival_id %>><label for=<%= festival.festival_id %>>&nbsp;</label>
+                                <% } else { %>
+                                    <input type="checkbox" onclick="dib(<%= festival.festival_id %>)" id=<%= festival.festival_id %>><label for=<%= festival.festival_id %>>&nbsp;</label>
+                                <% }%>
                             </td>
+                            <td><%= festival.festival_title %></td>
+                            <td><%= festival.festival_description %></td>
+                            <td><%= festival.festival_place %></td>
+                            <td><%= festival.festival_start_date %> ~ <%= festival.festival_end_date %></td>
+                            <td><%= festival.festival_tel %></td>
                         </tr>
                         <% }) %>
                     </tbody>
@@ -73,20 +82,16 @@
             </div>
         </div>
         <script>
-            document
-                .querySelectorAll("table.interactive")
-                .forEach((element) => {
-                    element.addEventListener("click", (event) => {
-                        const row = event.path.find(
-                            (element) =>
-                                element.tagName === "TR" &&
-                                element.parentElement.tagName === "TBODY"
-                        );
-                        if (row) {
-                            row.classList.toggle("highlighted");
-                        }
-                    });
-                });
+
+            const dib = async (festivalId) => {
+                const postDib = await axios({
+                    method: 'post',
+                    url: 'http://localhost:3000/dibs',
+                    data: { festivalId: festivalId } 
+                 })
+                 console.log(postDib.data);
+                 alert(postDib.data.message)
+            }
         </script>
     </body>
 </html>

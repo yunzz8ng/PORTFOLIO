@@ -3,7 +3,7 @@ window.onload = function () {
 };
 
 function openFesitval(local) {
-    const options = "width=500, height=500, top=50%, left= 50%";
+    const options = "width=1300, height=800, top=50%, left= 50%";
     window.open(`http://localhost:3000/festival/${local}`, "_blank", options);
 }
 //지도 그리기
