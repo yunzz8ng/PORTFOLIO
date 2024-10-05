@@ -45,9 +45,6 @@ router.get('/festival/:local', authMiddleware, async (req, res) => {
             isDib: dibsMap[festival.festival_id] ? true : false // Dibs 정보 추가
         };
     });
-
-    console.log(result);
-    // res.json()
     res.render('festivalList', { festivals: result })
 })
 

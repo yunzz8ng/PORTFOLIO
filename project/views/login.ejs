@@ -19,11 +19,11 @@
                 document.getElementById("alert").innerHTML = alert_html;
             } else {
                 alert("로그인 성공");
+                window.close();
 
                 var form_info = document.getElementById("form_info");
                 form_info.id.value = form.id.value;
                 form_info.submit();
-                
             }     
         })
     }
@@ -45,6 +45,7 @@
         transform: translate(-50%, -50%);
     }
     .window-body{
+        width: 100%;
         margin-top: 1px;
         display: flex;
          justify-content: center;
@@ -115,9 +116,9 @@
     </div>
 </form>
 
-<form id="form_info" action="/edit" method="POST">
+<!-- <form id="form_info" action="/edit" method="POST">
     <input type="hidden" name="id">
 </div>
 </div>
-</form>
+</form> -->
 </body>
