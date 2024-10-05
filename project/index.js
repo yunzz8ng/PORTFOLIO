@@ -16,10 +16,12 @@ const indexRouter = require("./routes/index");
 const postsRouter = require("./routes/post");
 const likesRouter = require("./routes/likes");
 const commentsRouter = require("./routes/comments");
+const festivalRouter = require("./routes/festival");
 app.use("/", indexRouter);
 app.use("/", postsRouter);
 app.use("/", likesRouter);
 app.use("/", commentsRouter);
+app.use("/", festivalRouter);
 app.use(cors);
 
 const startServer = async () => {

@@ -2,6 +2,10 @@ window.onload = function () {
     drawMap('#container');
 };
 
+function openFesitval(local) {
+    const options = "width=500, height=500, top=50%, left= 50%";
+    window.open(`http://localhost:3000/festival/${local}`, "_blank", options);
+}
 //지도 그리기
 function drawMap(target) {
     var width = 1000; //지도의 넓이
@@ -46,6 +50,10 @@ function drawMap(target) {
         .attr('fill', '#008080');
 
     //geoJson데이터를 파싱하여 지도그리기
+    // * alert 기능 삽입 구간 d3.json 부터 labels = states 포함 .on('click) 이부분 alert
+    // to(do); **************************
+    // ************************x*çn
+
     d3.json('js/korea.json', function (json) {
         states
             .selectAll('path') //지역 설정
@@ -58,9 +66,9 @@ function drawMap(target) {
                 return 'path-' + d.properties.name_eng;
             }).on('click', (e) => {
                 console.log(e.properties.name)
-                alert(e.properties.name);
+                // alert(e.properties.name);
+                openFesitval(e.properties.name);
             });
-
 
         labels = states
             .selectAll('text')
