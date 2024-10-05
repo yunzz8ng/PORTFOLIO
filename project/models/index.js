@@ -1,8 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('my_db', 'useruser', 'wjddbswjd75.', {
-    host: 'localhost',
-    dialect: 'mysql'
-});
+const sequelize = new Sequelize(
+    process.env.DATABASE_NAME,
+    process.env.DATABASE_USER_NAME,
+    process.env.DATABASE_USER_PW,
+    {
+        host: process.env.DATABASE_HOST,
+        dialect: 'mysql',
+        port: process.env.DATABASE_PROT
+    }
+);
 
 // User 모델 정의
 const User = sequelize.define('User', {

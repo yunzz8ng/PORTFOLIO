@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/index");
-const SECRET_KEY = "yunzzang";
+require('dotenv').config();
 
 module.exports = (req, res, next) => {
     const token = req.headers.cookie ? req.headers.cookie.split("token=")[1] : null;
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        const { userId } = jwt.verify(token, SECRET_KEY);
+        const { userId } = jwt.verify(token, process.env.JWT_SECRET_KEY);
         User.findByPk(userId).then((user) => {
             const reqUser = {
                 id: user.id,
