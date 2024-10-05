@@ -1,16 +1,19 @@
 const express = require("express");
 const { Festival, Dibs } = require("../models");
 const router = express.Router();
-var request = require('request');
+const { Op } = require('sequelize');
+const authMiddleware = require("../middlewares/auth-middleware");
 
-router.get('/festival/:local', async (req, res) => {
+router.get('/festival/:local', authMiddleware, async (req, res) => {
 
     const local = req.params.local;
-    const userId = 'wook';
+    const userId = res.locals.user.id;
 
     let searchFestival = await Festival.findAll({
         where: {
-            festival_local: local
+            festival_local: {
+                [Op.like]: `%${local}%`
+            }
         },
         order: [['festival_start_date', 'ASC']]
     })
@@ -39,42 +42,8 @@ router.get('/festival/:local', async (req, res) => {
     });
 
     console.log(result);
+    // res.json()
     res.render('festivalList', { festivals: result })
-})
-
-router.get('/api/festival', async (req, res) => {
-
-
-    var url = 'http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api';
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '=서비스키'; /* Service Key*/
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('100'); /* */
-    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('xml'); /* */
-    queryParams += '&' + encodeURIComponent('fstvlNm') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('opar') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('fstvlStartDate') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('fstvlEndDate') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('fstvlCo') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('mnnstNm') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('auspcInsttNm') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('suprtInsttNm') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('phoneNumber') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('homepageUrl') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('relateInfo') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('rdnmadr') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('lnmadr') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('latitude') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('longitude') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('referenceDate') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('instt_code') + '=' + encodeURIComponent(''); /* */
-    queryParams += '&' + encodeURIComponent('instt_nm') + '=' + encodeURIComponent(''); /* */
-
-    let response = await request({
-        url: url + queryParams,
-        method: 'GET'
-    })
-
-    console.log(response)
 })
 
 module.exports = router;
