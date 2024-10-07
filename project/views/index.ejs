@@ -17,7 +17,7 @@
         }
 
         function openMap() {
-            const options = "width=300, height=500, top=50%, left= 50%";
+            const options = "width=700, height=1000, top=50%, left= 50%";
             window.open("http://localhost:3000/korea", "_blank", options);
         }
 
@@ -322,11 +322,23 @@
                     </div>
                 </div>
                 <% if (user){ %>
-                <div class="profileImg"><img src="/img/logo.png" /></div>
-                <div>
-                    <p><%= user.id %> 환영합니다.</p>
+                <div style="height:100%; background-color: #c3c3c3;">
+                 <div class="profileImg"><img src="/img/logo.png" /></div>
+                  <br>
+                  &nbsp;&nbsp;&nbsp;<span><%= user.id %> 로그인</span><br>
+                  <br>
+                  &nbsp;&nbsp;&nbsp;<span><%= user.name %>님 환영합니다.</span>
+                    <br><br>&nbsp;&nbsp;&nbsp;<a href="/logout" class="logout-button">로그아웃</a>
+     
                 </div>
-                <% } %>
+                <% } else { %>
+                  <div  class="profileImg"><img src="/img/logo.png" />
+                    <br>
+                    &nbsp;&nbsp;&nbsp;<span>ID ; UnKown</span>
+                    <br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;<span>; Need Login</span>
+                  <% } %>
             </div>
         </div>
         <footer>

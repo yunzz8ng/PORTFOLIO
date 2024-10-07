@@ -4,7 +4,6 @@ const user = require("../controller/UserController");
 const router = express.Router();
 const { User } = require('../models/index')
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = 'yunzzang';
 // const posts = require('./posts');
 const authMiddleWare = require("../middlewares/auth-middleware");
 
@@ -80,7 +79,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign(
             { name: user.name, userId: user.id },
-            SECRET_KEY,
+            process.env.JWT_SECRET_KEY,
             {
                 expiresIn: "1h",
             }

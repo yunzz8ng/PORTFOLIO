@@ -19,12 +19,13 @@
                 document.getElementById("alert").innerHTML = alert_html;
             } else {
                 alert("로그인 성공");
-                window.close();
+                
 
                 var form_info = document.getElementById("form_info");
                 form_info.id.value = form.id.value;
                 form_info.submit();
-            }     
+                
+            }   
         })
     }
     
@@ -53,7 +54,7 @@
        position: relative;
     }
     .input-box {
-        width: 100%;
+        width: 95%;
     }
     form {
         width: 100%;
