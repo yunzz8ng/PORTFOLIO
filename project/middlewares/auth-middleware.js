@@ -28,8 +28,15 @@ module.exports = (req, res, next) => {
             return next();
         });
     } catch (err) {
-        res.status(401).send({
-            errorMessage: "로그인 후 이용 가능한 기능입니다.",
-        });
+        console.log(err.message);
+        if (err.message == 'jwt expired' || err.message == 'jwt malformed') {
+            res.clearCookie('token');
+            res.next()
+            // res.next();
+        } 
+        res.send(500).send({
+            message: '서버 오류 발생',
+            error: err
+        })
     }
 };
