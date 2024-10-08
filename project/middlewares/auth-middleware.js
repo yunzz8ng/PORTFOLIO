@@ -30,10 +30,9 @@ module.exports = (req, res, next) => {
     } catch (err) {
         console.log(err.message);
         if (err.message == 'jwt expired' || err.message == 'jwt malformed') {
-            res.clearCookie('token');
-            res.next()
+            return res.clearCookie('token').redirect('/');
             // res.next();
-        } 
+        }
         res.send(500).send({
             message: '서버 오류 발생',
             error: err
